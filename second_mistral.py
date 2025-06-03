@@ -58,7 +58,7 @@ client = OpenAI(api_key=API_KEY, base_url="https://api.mistral.ai/v1")
 def make_api_call_with_retry(messages):
     max_retries = 5
     retry_delay = 1  # Initial delay in seconds
-#MISTRAL_KEY="BGj1La66UJtvXtOINHMemIHWc76Lr85B"
+#"TESTBGj1La66UJtvXtOINHMemIHWc76Lr85B"
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
