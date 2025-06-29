@@ -1,0 +1,47 @@
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import CharacterTextSplitter
+from openai import OpenAI
+from dotenv import load_dotenv
+from langchain_qdrant import QdrantVectorStore
+from langchain_openai import OpenAIEmbeddings
+
+
+import os
+
+load_dotenv();
+loader = PyPDFLoader("./nodejs.pdf");
+
+# 1. PypdfLoader Load the PDF document 
+# 2. chunk the Document into pages
+# 3. Provide Embeedings
+
+loader_py = loader.load(); # Reads PDS
+
+OPENAI_KEY = os.getenv("OPENAI_KEY");
+print(f"OpenAI Key: {OPENAI_KEY}")
+
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=350, separator="\n");
+docs = text_splitter.split_documents(loader_py);
+
+# Create Embeddings
+client = OpenAI(api_key=os.getenv("OPENAI_KEY"));
+
+# response = client.embeddings.create(
+#     model="text-embedding-3-small",
+#     input=[doc.page_content for doc in docs]
+# );
+
+# print (response.data[0].embedding)
+# print (len(response.data[0].__dict__.keys()))
+
+embeddingeModel =  OpenAIEmbeddings(
+    model="text-embedding-3-small",
+    api_key=os.getenv("OPENAI_KEY")
+)
+#Store in Vector Qudrant db 
+qdrant = QdrantVectorStore.from_documents(
+    documents=docs,
+    url="http://localhost:6333",
+    collection_name="NodeJSCollection",
+    embedding=embeddingeModel
+)
