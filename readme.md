@@ -10,7 +10,7 @@ pip install "fastapi[standard]"
 deactivate
 
 
-Git Comments
+#Git Comments
 1. Initialize a Git Repository (if not already)
 Navigate to your project folder (like GenAIpython), and run:
 
@@ -19,7 +19,7 @@ Copy
 Edit
 cd /f/pythonProject/GenAIpython
 git init
-2. Add a .gitignore File
+#2. Add a .gitignore File
 Ensure you ignore unnecessary files (e.g., virtual environments for Python). A typical .gitignore might include:
 
 gitignore
@@ -29,17 +29,17 @@ __pycache__/
 *.py[cod]
 venv/
 .env
-3. Stage Your Files
+#3. Stage Your Files
 bash
 Copy
 Edit
 git add .
-4. Commit Your Changes
+#4. Commit Your Changes
 bash
 Copy
 Edit
 git commit -m "Initial commit"
-5. Link to the GitHub Repo
+#5. Link to the GitHub Repo
 If your GitHub repository is named your-repo, run:
 
 bash
@@ -49,7 +49,7 @@ git remote add origin https://github.com/rajeshpola/your-repo.git
 git branch -M main
 git push -u origin main
 
-
+##Merge the code 
 Option 1 – Merge GitHub changes into your code (safe)
 bash
 Copy
